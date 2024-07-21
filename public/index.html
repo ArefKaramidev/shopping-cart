@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Store</title>
+    <link rel="stylesheet" href="/src/output.css" />
+    <script defer src="/script/app.js"></script>
+  </head>
+  <body class="overflow-x-hidden">
+    <section class="text-center">
+      <div
+        class="px-4 py-2 bg-green-500 rounded-lg inline-block absolute left-[40%] -top-16 message duration-300"
+      >
+        <span class="text-xl text-white">
+          The product added successfully ✅</span
+        >
+      </div>
+    </section>
+
+    <header
+      class="flex items-center justify-between px-2 py-2 border-b border-solid"
+    >
+      <div>
+        <img src="/img/JavaScript-logo.png" alt="" class="rounded-sm" />
+      </div>
+      <nav class="sm:hidden lg:hidden xl:inline-block">
+        <ul class="flex justify-between items-center">
+          <li class="font-medium px-3 text-xl">
+            <a href="#" class="">Home</a>
+          </li>
+          <li class="font-medium px-3 text-xl">
+            <a href="#" class="">Products</a>
+          </li>
+          <li class="font-medium px-3 text-xl">
+            <a href="#" class="">Support</a>
+          </li>
+          <li class="font-medium px-3 text-xl">
+            <a href="#" class="">About</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="sm:hidden lg:hidden xl:inline-block">
+        <a href="#" class="fa-solid fa-user text-xl"></a>
+        <div class="inline-block text-center">
+          <button id="cart" class="fa-solid fa-cart-shopping px-16 text-xl">
+            <span
+              class="inline-block w-5 h-6 relative -top-2 -left-2 text-[.80rem] bg-amber-600 rounded-full text-white countp"
+              >0</span
+            >
+          </button>
+        </div>
+        <a href="#" class="fa-solid fa-magnifying-glass text-xl"></a>
+      </div>
+
+      <div class="text-2xl xl:hidden lg:inline-block sm:inline-block">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+    </header>
+
+    <menu
+      class="w-96 h-full bg-gray-400 fixed left-0 -translate-x-full duration-500 top-0 overflow-y-scroll"
+    >
+      <div
+        class="fa-solid fa-circle-xmark block bg-red-600 p-5 text-xl c``lose"
+      ></div>
+    </menu>
+
+    <main>
+      <span class="text-lg text-gray-400 inline-block pt-14 px-4 mt-5"
+        >Clothing</span
+      >
+      <div>
+        <div class="flex justify-evenly items-center flex-wrap dressDiv">
+          <!-- clothing -->
+        </div>
+
+        <span class="text-lg text-gray-400 inline-block py-14 px-4 mt-5"
+          >Perfume</span
+        >
+        <div class="flex justify-evenly items-center flex-wrap perfumeDiv">
+          <!-- perfume -->
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
