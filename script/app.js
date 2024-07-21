@@ -162,3 +162,9 @@ function showCartPr() {
     });
   }
 }
+
+function deleteItem(id) {
+  const test = JSON.parse(localStorage.getItem("product"));
+  const removeItem = test.filter((item) => item.id !== id);
+  addToLocalStorage(removeItem);
+}
