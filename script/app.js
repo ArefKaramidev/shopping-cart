@@ -2,50 +2,58 @@ const products = [
   {
     img: "/img/dress1.jpg",
     title: "Dress1",
-    price: "12$",
+    price: 12,
     id: 1,
+    count: 1,
   },
   {
     img: "/img/dress2.jpg",
     title: "Dress2",
-    price: "$50",
+    price: 50,
     id: 2,
+    count: 1,
   },
   {
     img: "/img/dress3.jpg",
     title: "Dress3",
-    price: "62$",
+    price: 62,
     id: 3,
+    count: 1,
   },
   {
     img: "/img/dress4.jpg",
     title: "Dress4",
-    price: "25$",
+    price: 45,
     id: 4,
+    count: 1,
   },
   {
     img: "/img/p1.jpg",
     title: "Savag",
-    price: "120$",
+    price: 120,
     id: 5,
+    count: 1,
   },
   {
     img: "/img/p2.jpg",
     title: "Silver secret",
-    price: "$150",
+    price: 150,
     id: 6,
+    count: 1,
   },
   {
     img: "/img/p3.jpg",
     title: "Tomford",
-    price: "162$",
+    price: 162,
     id: 7,
+    count: 1,
   },
   {
     img: "/img/p5.jpg",
     title: "Prada",
-    price: "255$",
+    price: 255,
     id: 8,
+    count: 1,
   },
 ];
 
@@ -60,7 +68,7 @@ products.forEach((item) => {
   <img src=${item.img} alt="dress" />
   <div class="flex justify-between py-2">
   <span class="font-medium">${item.title}</span>
-  <span class="text-gray-900">${item.price}</span>
+  <span class="text-gray-900">${item.price}$</span>
   </div>
   <div>
   <button
@@ -78,7 +86,7 @@ products.forEach((item) => {
   <img src=${item.img} alt="dress" />
   <div class="flex justify-between py-2">
   <span class="font-medium">${item.title}</span>
-  <span class="text-gray-900">${item.price}</span>
+  <span class="text-gray-900">${item.price}$</span>
   </div>
   <div>
   <button
@@ -94,11 +102,13 @@ products.forEach((item) => {
 
 const message = document.querySelector(".message");
 const countPr = document.querySelector(".countp");
-const cart = document.querySelector("header button");
+const cart = document.querySelector(".cart");
 const close = document.querySelector(".close");
 const menubar = document.querySelector("menu");
+
 showCartPr();
 let j = 1;
+
 const addButton = document.querySelectorAll(".btn");
 
 cart.addEventListener("click", (e) => {
@@ -117,6 +127,13 @@ for (let i = 0; i <= addButton.length; i++) {
     }, 750);
     countPr.textContent = j++;
     findproduct(addButton[i].id);
+
+    if (e.target.attributes.id) {
+      addButton[i].disabled = "disable";
+      addButton[i].textContent = "Added In Your Cart";
+    }
+
+    // countPr.nextElementSibling.innerHTML =
   });
 }
 
@@ -148,10 +165,14 @@ function showCartPr() {
              />
              <div class="flex-col w-full h-full">
                <div class="font-medium">${product.title}</div>
-               <div class="font-medium">${product.price}</div>
+               <div class="font-medium" id='price'>${product.price}$</div>
              </div>
              <i class="fa-solid fa-x" onclick='deleteItem(${product.id})'></i>
            </div>
+             <div class="w-full text-center py-2">
+          <button class="font-medium text-white text-lg" onclick="miness(${product.id},this)">< ${product.count}</button>
+          <button class="font-medium text-white text-lg "onclick="plus(${product.id},this)">></button>
+        </div>
            <div class="w-full text-center">
              <button class="bg-teal-700 p-2 rounded-md text-white">
                payment
@@ -166,5 +187,46 @@ function showCartPr() {
 function deleteItem(id) {
   const test = JSON.parse(localStorage.getItem("product"));
   const removeItem = test.filter((item) => item.id !== id);
+  const item = test.find((item) => item.id === id);
   addToLocalStorage(removeItem);
+  if (menubar.innerHTML === "") {
+    localStorage.clear();
+  }
+  enableButtons(item.id - 1);
+}
+
+function enableButtons(index) {
+  addButton[index].disabled = false;
+  addButton[index].textContent = "Add to cart";
+}
+
+function miness(idProduct, element) {
+  const selectedProduct = products.find((item) => item.id === idProduct);
+  element.nextElementSibling.innerHTML = `<span> ></span>`;
+  selectedProduct.count == 1 ? 1 : (selectedProduct.count -= 1);
+  element.innerHTML = `<span>< </span><span>${selectedProduct.count}</span>`;
+  //price("deIncrease", selectedProduct);
+}
+
+function plus(idProduct, element) {
+  const selectedProduct = products.find((item) => item.id === idProduct);
+  element.previousElementSibling.innerHTML = `<span>< </span>`;
+  selectedProduct.count += 1;
+  element.innerHTML = `<span>${selectedProduct.count}</span><span> ></span>`;
+  // price("increase", selectedProduct);
+}
+
+// function price(mode, product) {
+//   const showPrice = document.querySelector("#price");
+//   if (mode === "increase") {
+//     totaly = product.price * product.count;
+//     showPrice.textContent = `${totaly}$`;
+//   } else {
+//     product.price = totaly - product.price;
+//     showPrice.textContent = `${product.price}$`;
+//   }
+// }
+
+function notif() {
+  console.log("this product is alredy exist ");
 }
