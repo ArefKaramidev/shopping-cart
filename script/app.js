@@ -59,57 +59,67 @@ const products = [
 
 const dressDiv = document.querySelector(".dressDiv");
 const perfumeDiv = document.querySelector(".perfumeDiv");
-
-products.forEach((item) => {
-  if (item.id <= 4) {
-    dressDiv.innerHTML += ` <div
-    class="w-64 h-[26rem ] bg-white rounded-md ml-4 duration-500 hover:scale-95"
-  >
-  <img src=${item.img} alt="dress" />
-  <div class="flex justify-between py-2">
-  <span class="font-medium">${item.title}</span>
-  <span class="text-gray-900">${item.price}$</span>
-  </div>
-  <div>
-  <button
-  class="px-6 py-2 w-full font-medium bg-slate-500 rounded-br-md rounded-bl-md text-white duration-200 active:scale-95 active:bg-slate-700 btn"
-  id="${item.id}"
-  >
-  Add to cart
-  </button>
-  </div>
-  </div>`;
-  } else {
-    perfumeDiv.innerHTML += ` <div
-  class="w-64 h-[26rem ] bg-white rounded-md ml-4 duration-500 hover:scale-95"
-  >
-  <img src=${item.img} alt="dress" />
-  <div class="flex justify-between py-2">
-  <span class="font-medium">${item.title}</span>
-  <span class="text-gray-900">${item.price}$</span>
-  </div>
-  <div>
-  <button
-  class="px-6 py-2 w-full font-medium bg-slate-500 rounded-br-md rounded-bl-md text-white duration-200 active:scale-95 active:bg-slate-700 btn"
-  id="${item.id}"
-  >
-  Add to cart
-  </button>
-  </div>
-  </div>`;
-  }
-});
-
+showAllProduct();
 const message = document.querySelector(".message");
 const countPr = document.querySelector(".countp");
 const cart = document.querySelector(".cart");
 const close = document.querySelector(".close");
 const menubar = document.querySelector("menu");
-
+const insidePr = document.querySelector("#insidePr");
+const search = document.querySelector(".search");
+const textBox = document.querySelector("#textbox");
+const main = document.querySelector("main");
+let fg = true;
+let fillterProduct;
 showCartPr();
 let j = 1;
 
 const addButton = document.querySelectorAll(".btn");
+
+search.addEventListener("click", (e) => {
+  textBox.style.display = "inline-block";
+  cart.style.display = "none";
+  if (!fg) {
+    textBox.style.display = "none";
+    cart.style.display = "inline-block";
+
+    fg = true;
+  } else fg = false;
+});
+
+textBox.addEventListener("input", (e) => {
+  fillterProduct = [...products];
+  fillterProduct = products.filter((item) =>
+    item.title.toLowerCase().includes(e.target.value)
+  );
+
+  if (!e.target.value == "") {
+    dressDiv.innerHTML = "";
+    perfumeDiv.innerHTML = "";
+    fillterProduct.forEach((item) => {
+      dressDiv.innerHTML += ` <div
+        class="w-64 h-[26rem ] bg-white rounded-md ml-4 duration-500 hover:scale-95"
+      >
+      <img src=${item.img} alt="dress" />
+      <div class="flex justify-between py-2">
+      <span class="font-medium">${item.title}</span>
+      <span class="text-gray-900">${item.price}$</span>
+      </div>
+      <div>
+      <button
+      class="px-6 py-2 w-full font-medium bg-slate-500 rounded-br-md rounded-bl-md text-white duration-200 active:scale-95 active:bg-slate-700 btn"
+      id="${item.id}"
+      >
+      Add to cart
+      </button>
+      </div>
+      </div>`;
+    });
+  } else {
+    dressDiv.innerHTML = "";
+    showAllProduct();
+  }
+});
 
 cart.addEventListener("click", (e) => {
   menubar.style.transform = "translateX(0)";
@@ -121,9 +131,9 @@ close.addEventListener("click", (e) => {
 
 for (let i = 0; i <= addButton.length; i++) {
   addButton[i].addEventListener("click", (e) => {
-    message.style.top = "5.5rem";
+    message.style.top = "7rem";
     setTimeout(() => {
-      message.style.top = "-6rem";
+      message.style.top = "-7rem";
     }, 750);
     countPr.textContent = j++;
     findproduct(addButton[i].id);
@@ -132,8 +142,6 @@ for (let i = 0; i <= addButton.length; i++) {
       addButton[i].disabled = "disable";
       addButton[i].textContent = "Added In Your Cart";
     }
-
-    // countPr.nextElementSibling.innerHTML =
   });
 }
 
@@ -153,10 +161,10 @@ function showCartPr() {
   const data = JSON.parse(localStorage.getItem("product"));
   if (data === null) return;
   else {
-    menubar.innerHTML = "";
+    insidePr.innerHTML = "";
     data.forEach((product) => {
-      menubar.innerHTML += `
-        <div class="mt-12">
+      insidePr.innerHTML += `
+        <div class="mt-5">
            <div class="w-full p-4 h-16 flex">
              <img
                src=${product.img}
@@ -205,7 +213,7 @@ function miness(idProduct, element) {
   element.nextElementSibling.innerHTML = `<span> ></span>`;
   selectedProduct.count == 1 ? 1 : (selectedProduct.count -= 1);
   element.innerHTML = `<span>< </span><span>${selectedProduct.count}</span>`;
-  //price("deIncrease", selectedProduct);
+  price("deIncrease", selectedProduct);
 }
 
 function plus(idProduct, element) {
@@ -213,20 +221,58 @@ function plus(idProduct, element) {
   element.previousElementSibling.innerHTML = `<span>< </span>`;
   selectedProduct.count += 1;
   element.innerHTML = `<span>${selectedProduct.count}</span><span> ></span>`;
-  // price("increase", selectedProduct);
+  price("increase", selectedProduct);
 }
 
-// function price(mode, product) {
-//   const showPrice = document.querySelector("#price");
-//   if (mode === "increase") {
-//     totaly = product.price * product.count;
-//     showPrice.textContent = `${totaly}$`;
-//   } else {
-//     product.price = totaly - product.price;
-//     showPrice.textContent = `${product.price}$`;
-//   }
-// }
+function price(mode, product) {
+  const showPrice = document.querySelectorAll("#price");
+  if (mode === "increase") {
+    totaly = product.price * product.count;
+    showPrice[product.id - 1].textContent = `${totaly}$`;
+  } else {
+    product.price = totaly - product.price;
+    showPrice[product.id - 1].textContent = `${product.price}$`;
+  }
+}
 
-function notif() {
-  console.log("this product is alredy exist ");
+function showAllProduct() {
+  products.forEach((item) => {
+    if (item.id <= 4) {
+      dressDiv.innerHTML += ` <div
+    class="w-64 h-[26rem ] bg-white rounded-md ml-4 duration-500 xl:hover:scale-95"
+  >
+  <img src=${item.img} alt="dress" />
+  <div class="flex justify-between py-2">
+  <span class="font-medium">${item.title}</span>
+  <span class="text-gray-900">${item.price}$</span>
+  </div>
+  <div>
+  <button
+  class="px-6 py-2 w-full font-medium bg-slate-500 rounded-br-md rounded-bl-md text-white duration-200 active:scale-95 active:bg-slate-700 btn"
+  id="${item.id}"
+  >
+  Add to cart
+  </button>
+  </div>
+  </div>`;
+    } else {
+      perfumeDiv.innerHTML += ` <div
+  class="w-64 h-[26rem ] bg-white rounded-md ml-4 duration-500 xl:hover:scale-95"
+  >
+  <img src=${item.img} alt="dress" />
+  <div class="flex justify-between py-2">
+  <span class="font-medium">${item.title}</span>
+  <span class="text-gray-900">${item.price}$</span>
+  </div>
+  <div>
+  <button
+  class="px-6 py-2 w-full font-medium bg-slate-500 rounded-br-md rounded-bl-md text-white duration-200 active:scale-95 active:bg-slate-700 btn"
+  id="${item.id}"
+  >
+  Add to cart
+  </button>
+  </div>
+  </div>`;
+    }
+  });
 }

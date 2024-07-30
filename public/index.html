@@ -15,23 +15,30 @@
     <script defer src="/script/app.js"></script>
   </head>
   <body class="overflow-x-hidden">
-    <section class="text-center">
+    <!-- notfication for add product in cart -->
+    <section class="w-full flex justify-center text-center">
       <div
-        class="px-4 py-2 bg-green-500 rounded-lg inline-block absolute left-[40%] -top-16 message duration-300"
+        class="px-2 py-2 bg-green-500 rounded-lg inline-block absolute -top-24 message duration-300 xl:z-10"
       >
         <span class="text-xl text-white">
           The product added successfully ✅</span
         >
       </div>
     </section>
+    <!-- ------------------------- -->
 
     <header
-      class="flex items-center justify-between px-2 py-2 border-b border-solid"
+      class="flex fixed w-full items-center justify-between px-2 py-2 border-b border-solid"
     >
       <div>
-        <img src="/img/JavaScript-logo.png" alt="" class="rounded-sm" />
+        <img
+          src="/img/64px-EBay_logo.png"
+          alt=""
+          class="rounded-sm px-4 py-4"
+        />
       </div>
-      <nav class="sm:hidden lg:hidden xl:inline-block">
+      <!-- ----- sections --------- -->
+      <nav class="hidden sm:inline-block lg:inline-block xl:inline-block">
         <ul class="flex justify-between items-center">
           <li class="font-medium px-3 text-xl">
             <a href="#" class="">Home</a>
@@ -47,32 +54,40 @@
           </li>
         </ul>
       </nav>
-      <div class="sm:hidden lg:hidden xl:inline-block">
-        <a href="#" class="fa-solid fa-user text-xl"></a>
-        <div class="inline-block text-center">
-          <button class="fa-solid fa-cart-shopping px-16 text-xl cart">
+      <!-- ----- sections --------- -->
+
+      <div>
+        <!-- -----icons------ -->
+        <div class="flex items-center justify-center text-center">
+          <button class="fa-solid fa-cart-shopping px-5 mr-9 text-xl cart">
             <span
               class="inline-block w-5 h-6 relative -top-2 -left-2 text-[.80rem] bg-amber-600 rounded-full text-white countp"
               >0</span
             >
           </button>
+          <button
+            class="fa-solid fa-magnifying-glass text-xl mr-2 search"
+          ></button>
+          <input
+            type="search"
+            class="hidden outline-none border border-gray-500 px-2 py-1 rounded-full placeholder:text-sm placeholder:italic"
+            placeholder="Search Product ..."
+            id="textbox"
+          />
         </div>
-        <a href="#" class="fa-solid fa-magnifying-glass text-xl"></a>
       </div>
-
-      <div class="text-2xl xl:hidden lg:inline-block sm:inline-block">
-        <button class="fa-solid fa-bars cart"></button>
-      </div>
+      <!-- -----icons------ -->
     </header>
 
     <menu
       class="w-96 h-full bg-gray-400 fixed left-0 -translate-x-full duration-500 top-0 overflow-y-scroll"
     >
-      <div class="fa-solid fa-circle-xmark block p-5 text-xl close"></div>
+      <div class="fa-solid fa-circle-xmark block p-2 text-xl close"></div>
+      <div id="insidePr"></div>
     </menu>
 
     <main>
-      <span class="text-lg text-gray-400 inline-block pt-14 px-4 mt-5"
+      <span class="text-lg text-gray-400 inline-block pt-14 px-4 mt-8"
         >Clothing</span
       >
       <div>
