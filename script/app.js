@@ -72,7 +72,7 @@ const search = document.querySelector(".search");
 const textBox = document.querySelector("#textbox");
 const main = document.querySelector("main");
 const clothingTitle = document.querySelector(".clothingtitle");
-const perfumeTitle = document.querySelector(".perfumetitle");
+const perfumeTitle = document.querySelector(".prfumetitle");
 let fg = true;
 let fillterProduct;
 let j = 1;
