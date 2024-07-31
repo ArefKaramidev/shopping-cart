@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="/src/output.css" />
     <script defer src="/script/app.js"></script>
   </head>
+
   <body class="overflow-x-hidden">
     <!-- notfication for add product in cart -->
     <section class="w-full flex justify-center text-center">
@@ -37,7 +38,7 @@
           class="rounded-sm px-4 py-4"
         />
       </div>
-      <!-- ----- sections --------- -->
+      <!-- ----- menu section --------- -->
       <nav class="hidden sm:inline-block lg:inline-block xl:inline-block">
         <ul class="flex justify-between items-center">
           <li class="font-medium px-3 text-xl">
@@ -54,7 +55,7 @@
           </li>
         </ul>
       </nav>
-      <!-- ----- sections --------- -->
+      <!-- ----- menu sections --------- -->
 
       <div>
         <!-- -----icons------ -->
@@ -70,7 +71,7 @@
           ></button>
           <input
             type="search"
-            class="hidden outline-none border border-gray-500 px-2 py-1 rounded-full placeholder:text-sm placeholder:italic"
+            class="hidden outline-none border border-gray-500 px-2 py-1 rounded-full placeholder:text-sm placeholder:italic bg-transparent"
             placeholder="Search Product ..."
             id="textbox"
           />
@@ -79,15 +80,19 @@
       <!-- -----icons------ -->
     </header>
 
+    <!-- start side bar -->
     <menu
       class="w-96 h-full bg-gray-400 fixed left-0 -translate-x-full duration-500 top-0 overflow-y-scroll"
     >
       <div class="fa-solid fa-circle-xmark block p-2 text-xl close"></div>
       <div id="insidePr"></div>
     </menu>
+    <!-- End side bar -->
 
     <main>
-      <span class="text-lg text-gray-400 inline-block pt-14 px-4 mt-8"
+      <!-- for show products  -->
+      <span
+        class="text-lg text-gray-400 inline-block pt-14 px-4 mt-8 clothingtitle"
         >Clothing</span
       >
       <div>
@@ -95,7 +100,8 @@
           <!-- clothing -->
         </div>
 
-        <span class="text-lg text-gray-400 inline-block py-14 px-4 mt-5"
+        <span
+          class="text-lg text-gray-400 inline-block py-14 px-4 mt-5 prfumetitle"
           >Perfume</span
         >
         <div class="flex justify-evenly items-center flex-wrap perfumeDiv">

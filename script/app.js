@@ -57,9 +57,11 @@ const products = [
   },
 ];
 
+//*Parent element to display items in different categories
 const dressDiv = document.querySelector(".dressDiv");
 const perfumeDiv = document.querySelector(".perfumeDiv");
 showAllProduct();
+
 const message = document.querySelector(".message");
 const countPr = document.querySelector(".countp");
 const cart = document.querySelector(".cart");
@@ -69,10 +71,12 @@ const insidePr = document.querySelector("#insidePr");
 const search = document.querySelector(".search");
 const textBox = document.querySelector("#textbox");
 const main = document.querySelector("main");
+const clothingTitle = document.querySelector(".clothingtitle");
+const perfumeTitle = document.querySelector(".perfumetitle");
 let fg = true;
 let fillterProduct;
-showCartPr();
 let j = 1;
+showCartPr();
 
 const addButton = document.querySelectorAll(".btn");
 
@@ -96,6 +100,8 @@ textBox.addEventListener("input", (e) => {
   if (!e.target.value == "") {
     dressDiv.innerHTML = "";
     perfumeDiv.innerHTML = "";
+    perfumeTitle.textContent = "";
+    clothingTitle.textContent = "";
     fillterProduct.forEach((item) => {
       dressDiv.innerHTML += ` <div
         class="w-64 h-[26rem ] bg-white rounded-md ml-4 duration-500 hover:scale-95"
@@ -145,6 +151,7 @@ for (let i = 0; i <= addButton.length; i++) {
   });
 }
 
+//* This function is to store the product in localStorage
 function findproduct(button) {
   const data = products.find((item) => button == item.id);
   let dataArray = JSON.parse(localStorage.getItem("product")) || [];
@@ -152,11 +159,13 @@ function findproduct(button) {
   addToLocalStorage(dataArray);
 }
 
+//*for adding in localStorage
 function addToLocalStorage(data) {
   localStorage.setItem("product", JSON.stringify(data));
   showCartPr();
 }
 
+//*for show selected product in cart
 function showCartPr() {
   const data = JSON.parse(localStorage.getItem("product"));
   if (data === null) return;
@@ -192,6 +201,7 @@ function showCartPr() {
   }
 }
 
+//*for delete selected item in cart
 function deleteItem(id) {
   const test = JSON.parse(localStorage.getItem("product"));
   const removeItem = test.filter((item) => item.id !== id);
@@ -203,11 +213,13 @@ function deleteItem(id) {
   enableButtons(item.id - 1);
 }
 
+//* for Do not be selected more than once
 function enableButtons(index) {
   addButton[index].disabled = false;
   addButton[index].textContent = "Add to cart";
 }
 
+//*To reduce the number
 function miness(idProduct, element) {
   const selectedProduct = products.find((item) => item.id === idProduct);
   element.nextElementSibling.innerHTML = `<span> ></span>`;
@@ -216,6 +228,7 @@ function miness(idProduct, element) {
   price("deIncrease", selectedProduct);
 }
 
+//*To increase the number
 function plus(idProduct, element) {
   const selectedProduct = products.find((item) => item.id === idProduct);
   element.previousElementSibling.innerHTML = `<span>< </span>`;
@@ -235,6 +248,7 @@ function price(mode, product) {
   }
 }
 
+//*To display all products in the array
 function showAllProduct() {
   products.forEach((item) => {
     if (item.id <= 4) {
