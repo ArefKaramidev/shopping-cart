@@ -57,41 +57,62 @@ const products = [
   },
 ];
 
-//*Parent element to display items in different categories
-const dressDiv = document.querySelector(".dressDiv");
-const perfumeDiv = document.querySelector(".perfumeDiv");
-showAllProduct();
+//*To access the elements
+const domSelector = (...element) => {
+  return element.map((el) => document.querySelector(el));
+};
 
-const message = document.querySelector(".message");
-const countPr = document.querySelector(".countp");
-const cart = document.querySelector(".cart");
-const close = document.querySelector(".close");
-const menubar = document.querySelector("menu");
-const insidePr = document.querySelector("#insidePr");
-const search = document.querySelector(".search");
-const textBox = document.querySelector("#textbox");
-const main = document.querySelector("main");
-const clothingTitle = document.querySelector(".clothingtitle");
-const perfumeTitle = document.querySelector(".prfumetitle");
-let fg = true;
-let fillterProduct;
-let j = 1;
+const [
+  dressDiv,
+  perfumeDiv,
+  message,
+  countPr,
+  cartBtn,
+  closeBtnMenu,
+  menubar,
+  renderProduct,
+  searchBtn,
+  searchBox,
+  mainContainer,
+  clothingTitle,
+  perfumeTitle,
+] = domSelector(
+  ".dressDiv",
+  ".perfumeDiv",
+  ".message",
+  ".countp",
+  ".cart",
+  ".close",
+  "menu",
+  "#insidePr",
+  ".search",
+  "#textbox",
+  "main",
+  ".clothingtitle",
+  ".prfumetitle"
+);
+
+showAllProduct();
 showCartPr();
 
 const addButton = document.querySelectorAll(".btn");
 
-search.addEventListener("click", (e) => {
-  textBox.style.display = "inline-block";
-  cart.style.display = "none";
+let fg = true;
+let fillterProduct;
+let j = 1;
+
+searchBtn.addEventListener("click", (e) => {
+  searchBox.style.display = "inline-block";
+  cartBtn.style.display = "none";
   if (!fg) {
-    textBox.style.display = "none";
-    cart.style.display = "inline-block";
+    searchBox.style.display = "none";
+    cartBtn.style.display = "inline-block";
 
     fg = true;
   } else fg = false;
 });
 
-textBox.addEventListener("input", (e) => {
+searchBox.addEventListener("input", (e) => {
   fillterProduct = [...products];
   fillterProduct = products.filter((item) =>
     item.title.toLowerCase().includes(e.target.value)
@@ -127,11 +148,11 @@ textBox.addEventListener("input", (e) => {
   }
 });
 
-cart.addEventListener("click", (e) => {
+cartBtn.addEventListener("click", (e) => {
   menubar.style.transform = "translateX(0)";
 });
 
-close.addEventListener("click", (e) => {
+closeBtnMenu.addEventListener("click", (e) => {
   menubar.style.transform = "translateX(-100%)";
 });
 
@@ -170,9 +191,9 @@ function showCartPr() {
   const data = JSON.parse(localStorage.getItem("product"));
   if (data === null) return;
   else {
-    insidePr.innerHTML = "";
+    renderProduct.innerHTML = "";
     data.forEach((product) => {
-      insidePr.innerHTML += `
+      renderProduct.innerHTML += `
         <div class="mt-5">
            <div class="w-full p-4 h-16 flex">
              <img
