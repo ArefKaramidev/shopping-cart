@@ -92,14 +92,37 @@ const [
   ".prfumetitle"
 );
 
+let Counter = 0
+
 showAllProduct();
 showCartPr();
 
+//* for select item and add to cart 
+addToCart()
+function addToCart() {
 const addButton = document.querySelectorAll(".btn");
+addButton.forEach(item => {
+  item.addEventListener("click", (e) => {
+    message.style.top = "7rem";
+    setTimeout(() => {
+      message.style.top = "-7rem";
+    }, 750);
+    findproduct(item.id);
+
+    if (e.target.attributes.id) {
+      item.disabled = "disable";
+      item.textContent = "Added In Your Cart";
+    }
+  });
+})
+}
+
+
+const addButton = document.querySelectorAll(".btn");
+
 
 let fg = true;
 let fillterProduct;
-let j = 1;
 
 searchBtn.addEventListener("click", (e) => {
   searchBox.style.display = "inline-block";
@@ -136,14 +159,13 @@ searchBox.addEventListener("input", (e) => {
       <button
       class="px-6 py-2 w-full font-medium bg-slate-500 rounded-br-md rounded-bl-md text-white duration-200 active:scale-95 active:bg-slate-700 btn"
       id="${item.id}"
-      onclick="addToCart()"
       >
       Add to cart
       </button>
       </div>
       </div>`;
     });
-   
+   addToCart()
   } else {
     dressDiv.innerHTML = "";
     showAllProduct();
@@ -158,25 +180,6 @@ closeBtnMenu.addEventListener("click", (e) => {
   menubar.style.transform = "translateX(-100%)";
 });
 
-//* for select item and add to cart 
-addToCart()
-function addToCart() {
-addButton.forEach(item => {
-  item.addEventListener("click", (e) => {
-    message.style.top = "7rem";
-    setTimeout(() => {
-      message.style.top = "-7rem";
-    }, 750);
-    countPr.textContent = j++;
-    findproduct(item.id);
-
-    if (e.target.attributes.id) {
-      item.disabled = "disable";
-      item.textContent = "Added In Your Cart";
-    }
-  });
-})
-}
 
 
 //* This function is to store the product in localStorage
@@ -196,6 +199,7 @@ function addToLocalStorage(data) {
 //*for show selected product in cart
 function showCartPr() {
   const data = JSON.parse(localStorage.getItem("product"));
+  countPr.textContent= data.length
   if (data === null) return;
   else {
     renderProduct.innerHTML = "";
@@ -239,6 +243,7 @@ function deleteItem(id) {
     localStorage.clear();
   }
   enableButtons(item.id - 1);
+  countPr.textContent= removeItem.length
 }
 
 //* for Do not be selected more than once
@@ -317,5 +322,7 @@ function showAllProduct() {
   </div>`;
     }
   });
+
+
 }
 
