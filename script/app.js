@@ -1,3 +1,7 @@
+import printFuckYou from "./test";
+
+printFuckYou();
+
 const products = [
   {
     img: "/img/dress1.jpg",
@@ -92,34 +96,32 @@ const [
   ".prfumetitle"
 );
 
-let Counter = 0
+let Counter = 0;
 
 showAllProduct();
 showCartPr();
 
-//* for select item and add to cart 
-addToCart()
+//* for select item and add to cart
+addToCart();
 function addToCart() {
-const addButton = document.querySelectorAll(".btn");
-addButton.forEach(item => {
-  item.addEventListener("click", (e) => {
-    message.style.top = "7rem";
-    setTimeout(() => {
-      message.style.top = "-7rem";
-    }, 750);
-    findproduct(item.id);
+  const addButton = document.querySelectorAll(".btn");
+  addButton.forEach((item) => {
+    item.addEventListener("click", (e) => {
+      message.style.top = "7rem";
+      setTimeout(() => {
+        message.style.top = "-7rem";
+      }, 750);
+      findproduct(item.id);
 
-    if (e.target.attributes.id) {
-      item.disabled = "disable";
-      item.textContent = "Added In Your Cart";
-    }
+      if (e.target.attributes.id) {
+        item.disabled = "disable";
+        item.textContent = "Added In Your Cart";
+      }
+    });
   });
-})
 }
 
-
 const addButton = document.querySelectorAll(".btn");
-
 
 let fg = true;
 let fillterProduct;
@@ -140,7 +142,7 @@ searchBox.addEventListener("input", (e) => {
   fillterProduct = products.filter((item) =>
     item.title.toLowerCase().includes(e.target.value)
   );
-  
+
   if (!e.target.value == "") {
     dressDiv.innerHTML = "";
     perfumeDiv.innerHTML = "";
@@ -165,7 +167,7 @@ searchBox.addEventListener("input", (e) => {
       </div>
       </div>`;
     });
-   addToCart()
+    addToCart();
   } else {
     dressDiv.innerHTML = "";
     showAllProduct();
@@ -179,8 +181,6 @@ cartBtn.addEventListener("click", (e) => {
 closeBtnMenu.addEventListener("click", (e) => {
   menubar.style.transform = "translateX(-100%)";
 });
-
-
 
 //* This function is to store the product in localStorage
 function findproduct(button) {
@@ -199,7 +199,7 @@ function addToLocalStorage(data) {
 //*for show selected product in cart
 function showCartPr() {
   const data = JSON.parse(localStorage.getItem("product"));
-  countPr.textContent= data.length
+  countPr.textContent = data.length;
   if (data === null) return;
   else {
     renderProduct.innerHTML = "";
@@ -243,7 +243,7 @@ function deleteItem(id) {
     localStorage.clear();
   }
   enableButtons(item.id - 1);
-  countPr.textContent= removeItem.length
+  countPr.textContent = removeItem.length;
 }
 
 //* for Do not be selected more than once
@@ -322,7 +322,4 @@ function showAllProduct() {
   </div>`;
     }
   });
-
-
 }
-
