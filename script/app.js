@@ -117,7 +117,7 @@ searchBox.addEventListener("input", (e) => {
   fillterProduct = products.filter((item) =>
     item.title.toLowerCase().includes(e.target.value)
   );
-
+  
   if (!e.target.value == "") {
     dressDiv.innerHTML = "";
     perfumeDiv.innerHTML = "";
@@ -136,12 +136,14 @@ searchBox.addEventListener("input", (e) => {
       <button
       class="px-6 py-2 w-full font-medium bg-slate-500 rounded-br-md rounded-bl-md text-white duration-200 active:scale-95 active:bg-slate-700 btn"
       id="${item.id}"
+      onclick="addToCart()"
       >
       Add to cart
       </button>
       </div>
       </div>`;
     });
+   
   } else {
     dressDiv.innerHTML = "";
     showAllProduct();
@@ -156,21 +158,26 @@ closeBtnMenu.addEventListener("click", (e) => {
   menubar.style.transform = "translateX(-100%)";
 });
 
-for (let i = 0; i <= addButton.length; i++) {
-  addButton[i].addEventListener("click", (e) => {
+//* for select item and add to cart 
+addToCart()
+function addToCart() {
+addButton.forEach(item => {
+  item.addEventListener("click", (e) => {
     message.style.top = "7rem";
     setTimeout(() => {
       message.style.top = "-7rem";
     }, 750);
     countPr.textContent = j++;
-    findproduct(addButton[i].id);
+    findproduct(item.id);
 
     if (e.target.attributes.id) {
-      addButton[i].disabled = "disable";
-      addButton[i].textContent = "Added In Your Cart";
+      item.disabled = "disable";
+      item.textContent = "Added In Your Cart";
     }
   });
+})
 }
+
 
 //* This function is to store the product in localStorage
 function findproduct(button) {
@@ -311,3 +318,4 @@ function showAllProduct() {
     }
   });
 }
+
