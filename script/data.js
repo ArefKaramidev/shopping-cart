@@ -1,0 +1,58 @@
+export const products = [
+  {
+    img: "./img/dress1.jpg",
+    title: "Dress1",
+    price: 12,
+    id: 1,
+    count: 1,
+  },
+  {
+    img: "./img/dress2.jpg",
+    title: "Dress2",
+    price: 50,
+    id: 2,
+    count: 1,
+  },
+  {
+    img: "./img/dress3.jpg",
+    title: "Dress3",
+    price: 62,
+    id: 3,
+    count: 1,
+  },
+  {
+    img: "./img/dress4.jpg",
+    title: "Dress4",
+    price: 45,
+    id: 4,
+    count: 1,
+  },
+  {
+    img: "./img/p1.jpg",
+    title: "Savag",
+    price: 120,
+    id: 5,
+    count: 1,
+  },
+  {
+    img: "./img/p2.jpg",
+    title: "Silver secret",
+    price: 150,
+    id: 6,
+    count: 1,
+  },
+  {
+    img: "./img/p3.jpg",
+    title: "Tomford",
+    price: 162,
+    id: 7,
+    count: 1,
+  },
+  {
+    img: "./img/p5.jpg",
+    title: "Prada",
+    price: 255,
+    id: 8,
+    count: 1,
+  },
+];
