@@ -7,6 +7,5 @@ export function findproduct(button) {
   let productData = JSON.parse(localStorage.getItem("product")) || [];
   productData = [...productData, selectedItem];
   addProductToLocalStorage(productData);
-
   showCartProduct();
 }

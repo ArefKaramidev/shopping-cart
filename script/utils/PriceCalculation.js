@@ -1,4 +1,4 @@
-export function PriceCalculation(mode, product) {
+export function priceCalculation(mode, product) {
   const showPrice = document.querySelectorAll("#price");
   if (mode === "increase") {
     totaly = product.price * product.count;

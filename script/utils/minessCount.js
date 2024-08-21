@@ -5,5 +5,5 @@ export function minessCount(idProduct, element) {
   element.nextElementSibling.innerHTML = `<span> ></span>`;
   selectedProduct.count == 1 ? 1 : (selectedProduct.count -= 1);
   element.innerHTML = `<span>< </span><span>${selectedProduct.count}</span>`;
-  PriceCalculation("deIncrease", selectedProduct);
+  priceCalculation("deIncrease", selectedProduct);
 }

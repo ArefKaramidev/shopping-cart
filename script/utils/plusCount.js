@@ -6,5 +6,5 @@ export function plusCount(idProduct, element) {
   element.previousElementSibling.innerHTML = `<span>< </span>`;
   selectedProduct.count += 1;
   element.innerHTML = `<span>${selectedProduct.count}</span><span> ></span>`;
-  PriceCalculation("increase", selectedProduct);
+  priceCalculation("increase", selectedProduct);
 }

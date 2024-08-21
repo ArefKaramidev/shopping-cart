@@ -22,18 +22,18 @@ showAllProduct();
 showCartProduct();
 addSelectedProductToCart();
 
-let fg = true;
+let openBox = true;
 let fillterProduct = [];
 
 searchBtn.addEventListener("click", () => {
   searchBox.style.display = "inline-block";
   cartBtn.style.display = "none";
-  if (!fg) {
+  if (!openBox) {
     searchBox.style.display = "none";
     cartBtn.style.display = "inline-block";
 
-    fg = true;
-  } else fg = false;
+    openBox = true;
+  } else openBox = false;
 });
 
 searchBox.addEventListener("input", ({ target: { value } }) => {
