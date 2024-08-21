@@ -1,4 +1,4 @@
-import { products } from "./data";
+import { products } from "./productData";
 import { dressDiv, perfumeDiv } from "./elements";
 
 export function showAllProduct() {

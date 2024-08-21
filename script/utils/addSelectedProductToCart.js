@@ -1,7 +1,7 @@
 import { message } from "./elements";
-import { findproduct } from "./findProduct";
+import { findproduct } from "./addSelectedItemTolocalstorage";
 
-export function addToCart() {
+export function addSelectedProductToCart() {
   const addButton = document.querySelectorAll(".btn");
   addButton.forEach((item) => {
     item.addEventListener("click", (e) => {
@@ -9,6 +9,7 @@ export function addToCart() {
       setTimeout(() => {
         message.style.top = "-7rem";
       }, 750);
+
       findproduct(item.id);
 
       if (e.target.attributes.id) {

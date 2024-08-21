@@ -1,0 +1,9 @@
+- variable names
+- initial data
+- remove unused data, parameters, arguments, functions, varibles, names, comments
+- searchbox event listener function refactor
+- inner html rewrite function
+- definitive names for functions.
+- don't repeat yourself (DRY)
+- You're not gonna need it (YAGNI)
+- Seperation of concerns

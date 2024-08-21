@@ -4,7 +4,7 @@ export const [
   dressDiv,
   perfumeDiv,
   message,
-  countPr,
+  countOfProduct,
   cartBtn,
   closeBtnMenu,
   menubar,

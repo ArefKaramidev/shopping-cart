@@ -1,5 +1,4 @@
-import { addToCart } from "./addToCart";
-import { products } from "./data";
+import { products } from "./utils/productData";
 import {
   dressDiv,
   perfumeDiv,
@@ -12,21 +11,21 @@ import {
   searchBox,
   clothingTitle,
   perfumeTitle,
-} from "./elements";
-import { enableButtons } from "./enableButton";
-import { plus } from "./plus";
-import { price } from "./Price";
-import { showAllProduct } from "./showAllProducts";
-import { showCartPr } from "./showCartPr";
+} from "./utils/elements";
+
+import { addSelectedProductToCart } from "./utils/addSelectedProductToCart";
+import { showAllProduct } from "./utils/showAllProducts";
+import { enableButtons } from "./utils/enableButton";
+import { showCartProduct } from "./utils/showCartProduct";
 
 showAllProduct();
-showCartPr();
-addToCart();
+showCartProduct();
+addSelectedProductToCart();
 
 let fg = true;
-let fillterProduct;
+let fillterProduct = [];
 
-searchBtn.addEventListener("click", (e) => {
+searchBtn.addEventListener("click", () => {
   searchBox.style.display = "inline-block";
   cartBtn.style.display = "none";
   if (!fg) {
@@ -37,13 +36,12 @@ searchBtn.addEventListener("click", (e) => {
   } else fg = false;
 });
 
-searchBox.addEventListener("input", (e) => {
-  fillterProduct = [...products];
+searchBox.addEventListener("input", ({ target: { value } }) => {
   fillterProduct = products.filter((item) =>
-    item.title.toLowerCase().includes(e.target.value)
+    item.title.toLowerCase().includes(value.toLowerCase())
   );
 
-  if (!e.target.value == "") {
+  if (!value == "") {
     dressDiv.innerHTML = "";
     perfumeDiv.innerHTML = "";
     perfumeTitle.textContent = "";
@@ -67,38 +65,23 @@ searchBox.addEventListener("input", (e) => {
       </div>
       </div>`;
     });
-    addToCart();
+    addSelectedProductToCart();
   } else {
     dressDiv.innerHTML = "";
     showAllProduct();
   }
 });
 
-cartBtn.addEventListener("click", (e) => {
+cartBtn.addEventListener("click", () => {
   menubar.style.transform = "translateX(0)";
 });
 
-closeBtnMenu.addEventListener("click", (e) => {
+closeBtnMenu.addEventListener("click", () => {
   menubar.style.transform = "translateX(-100%)";
 });
 
-//* This function is to store the product in localStorage
-
-//*for adding in localStorage
-addToLocalStorage(data);
-
 //*for show selected product in cart
-showCartPr();
+showCartProduct();
 
-//*for delete selected item in cart
-attachRemoveListener();
-
-//* for Do not be selected more than once
+//* for Do not be selected more than once item
 enableButtons(index);
-
-//*To increase the number
-plus(idProduct, element);
-
-price(mode, product);
-
-//*To display all products in the array

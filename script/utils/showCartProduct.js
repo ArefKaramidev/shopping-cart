@@ -1,16 +1,17 @@
-import { attachRemoveListener } from "./attachRemoveListener";
-import { countPr, renderProduct } from "./elements";
+import { attachRemoveItemListener } from "./attachRemoveItemListener";
+import { countOfProduct, renderProduct } from "./elements";
 
-export function showCartPr() {
-  const data = JSON.parse(localStorage.getItem("product"));
-  countPr.textContent == ""
-    ? (countPr.textContent = 0)
-    : (countPr.textContent = data.length);
-  if (data === null) return;
+export function showCartProduct() {
+  const dataOfProduct = JSON.parse(localStorage.getItem("product")) || [];
+  countOfProduct.textContent == ""
+    ? (countOfProduct.textContent = 0)
+    : (countOfProduct.textContent = dataOfProduct.length);
+  if (dataOfProduct === null) return;
   else {
     renderProduct.innerHTML = "";
-    data.forEach((product) => {
+    dataOfProduct.forEach((product) => {
       renderProduct.innerHTML += `
+      
           <div class="mt-5">
              <div class="w-full p-4 h-16 flex">
                <img
@@ -36,6 +37,6 @@ export function showCartPr() {
            </div>
      `;
     });
-    attachRemoveListener();
+    attachRemoveItemListener();
   }
 }
